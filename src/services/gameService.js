@@ -1,5 +1,6 @@
 import { gameState } from "../models/gameState.js";
 import { getRandomWord } from "../utils/wordGenerator.js";
+import { broadcast } from "../websocket/socket.js";
 
 export const resetGame = () => {
 
@@ -8,15 +9,41 @@ export const resetGame = () => {
     gameState.attemptsLeft = 6;
 }
 
+export const getGameStateResponse = () => {
+
+    const maskedword = gameState.word
+    .split("")
+    .map(letter => gameState.guessedLetters.includes(letter) ? letter : "_")
+    .join(" ");
+
+    return {
+        type: "update",
+        word: maskedword,
+        attempts: gameState.attemptsLeft,
+        usedLetters: gameState.guessedLetters,
+        message: "Nuevo juego iniciado. ¡Buena suerte!"
+    };
+
+};
 export const processGuess = (letter, player) => {
 
     letter = letter.toUpperCase();
 
     if (gameState.guessedLetters.includes(letter)) {
+
+        const maskedWord = gameState.word
+        .split("")
+        .map(letter => gameState.guessedLetters.includes(letter) ? letter : "_")
+        .join("");
+
         return {
             type: "info",
-            message: `La letra ${letter} ya ha sido adivinada.`
+            word: maskedWord,
+            attempts: gameState.attemptsLeft,
+            usedLetters: gameState.guessedLetters,
+            message: `La letra ${letter} ya fue adivinada o utilizada.`
         };
+    
     }
 
     gameState.guessedLetters.push(letter);
@@ -44,7 +71,15 @@ const buildResponse = (player, letter) => {
             message: `Felicidades, la palabra era ${gameState.word}.`
         };
 
-        resetGame();
+        setTimeout(() => {
+            resetGame();
+
+            const newState = getGameStateResponse();
+
+            broadcast(newState);
+
+        }, 2000);
+
         return response;
     }
 
@@ -56,7 +91,15 @@ const buildResponse = (player, letter) => {
             message: `Juego terminado. La palabra era ${gameState.word}.`
         };
 
-        resetGame();
+        setTimeout(() => {
+            resetGame();
+
+            const newState = getGameStateResponse();
+
+            broadcast(newState);
+
+        }, 2000);
+
         return response;
     }
 
