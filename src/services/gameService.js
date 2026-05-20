@@ -2,9 +2,9 @@ import { gameState } from "../models/gameState.js";
 import { getRandomWord } from "../utils/wordGenerator.js";
 import { broadcast } from "../websocket/socket.js";
 
-export const resetGame = () => {
+export const resetGame = async () => {
 
-    gameState.word = getRandomWord();
+    gameState.word = await getRandomWord();
     gameState.guessedLetters = [];
     gameState.attemptsLeft = 6;
 }
@@ -71,8 +71,8 @@ const buildResponse = (player, letter) => {
             message: `Felicidades, la palabra era ${gameState.word}.`
         };
 
-        setTimeout(() => {
-            resetGame();
+        setTimeout( async () => {
+            await resetGame();
 
             const newState = getGameStateResponse();
 
@@ -91,8 +91,8 @@ const buildResponse = (player, letter) => {
             message: `Juego terminado. La palabra era ${gameState.word}.`
         };
 
-        setTimeout(() => {
-            resetGame();
+        setTimeout( async () => {
+            await resetGame();
 
             const newState = getGameStateResponse();
 

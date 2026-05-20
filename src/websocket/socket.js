@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { handleMessage } from "../controllers/gameController.js";
-import { gameState } from "../models/gameState.js";
+import { gameState , initGame } from "../models/gameState.js";
 
 let clients = [];
 
@@ -16,7 +16,9 @@ export const broadcast = (data) => {
     
 };
 
-export const setupWebSocket = (server) => {
+export const setupWebSocket = async (server) => {
+
+    await initGame();
 
     const wss = new WebSocketServer({ server});
 

@@ -41,9 +41,9 @@ app.get("/game", (req, res) => {
 });
 
 //Reiniciar el juego
-app.post("/game/restart", (req, res) => {
+app.post("/game/restart", async (req, res) => {
 
-    resetGame(),
+    await resetGame();
 
     broadcast({
         type: "restart",
@@ -57,7 +57,7 @@ app.post("/game/restart", (req, res) => {
 });
 
 //Inicializar websocket
-setupWebSocket(server);
+await setupWebSocket(server);
 
 server.listen(PORT, () => {
     console.log('Servidor ahorcado corriendo en http://localhost:' + PORT);
