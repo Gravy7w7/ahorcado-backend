@@ -60,5 +60,5 @@ app.post("/game/restart", async (req, res) => {
 await setupWebSocket(server);
 
 server.listen(PORT, () => {
-    console.log('Servidor ahorcado corriendo en http://localhost:' + PORT);
+    console.log('Servidor ahorcado corriendo en Render:' + PORT);
 });
