@@ -24,7 +24,10 @@ export const getRandomWord = async () => {
 
     }catch(error){
         console.error("Error al obtener la palabra de la API: ", error);
-        const fallbackWords = ["PERRO", "GATO", "CASA", "ARBOL", "LIBRO"];
+        const fallbackWords = ["PERRO", "GATO", "CASA", "ARBOL", "LIBRO",
+             "CIELO", "MAR", "FUEGO", "TIERRA", "AMIGO", "FAMILIA", "CIUDAD", 
+             "PAIS", "MUNDO", "HOMBRE", "MUJER", "NIÑO", "NIÑA", "AUTO", "AVION",
+             "BARCO", "MOTO", "BICICLETA", "CAMION", "BUS", "TREN", "METRO",];
         return fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
     }
 
