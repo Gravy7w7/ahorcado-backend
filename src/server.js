@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(cors({
-    origin: "https://vercel.com/gravy7w7-s-projects/ahorcado-frontend/GpSjVtwsvDZGRtc2zKwE1LubSYMM"
+    origin: "https://ahorcado-frontend.vercel.app/"
 }));
 app.use(express.json());
 
