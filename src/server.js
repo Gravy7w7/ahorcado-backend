@@ -11,7 +11,9 @@ import { broadcast } from './websocket/socket.js';
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(cors({
+    origin: "https://vercel.com/gravy7w7-s-projects/ahorcado-frontend/GpSjVtwsvDZGRtc2zKwE1LubSYMM"
+}));
 app.use(express.json());
 
 // Ruta base para verificar que el servidor está funcionando
