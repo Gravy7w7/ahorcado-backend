@@ -27,7 +27,8 @@ export const getRandomWord = async () => {
         const fallbackWords = ["PERRO", "GATO", "CASA", "ARBOL", "LIBRO",
              "CIELO", "MAR", "FUEGO", "TIERRA", "AMIGO", "FAMILIA", "CIUDAD", 
              "PAIS", "MUNDO", "HOMBRE", "MUJER", "NIÑO", "NIÑA", "AUTO", "AVION",
-             "BARCO", "MOTO", "BICICLETA", "CAMION", "BUS", "TREN", "METRO",];
+             "BARCO", "MOTO", "BICICLETA", "CAMION", "BUS", "TREN", "METRO", 
+             "ESCUELA", "TRABAJO", "JUEGO", "DEPORTE", "MUSICA", "PELICULA", "SERIE"];
         return fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
     }
 
